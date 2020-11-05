@@ -35,12 +35,16 @@ status: ## Show the status of running containers
 .PHONY: backup-db restore-db
 
 backup-db: stop ## Backup database volume and save in the backup folder
-	docker run --rm -v ${DB_VOLUME}:/data -v $(CURDIR)/backup:/backup ubuntu tar -zcf /backup/${DB_VOLUME}_${NOW}.tgz /data
+	$(call ubuntu-fn,tar -zcf /backup/${DB_VOLUME}_${NOW}.tgz /data)
 restore-db: ## Restore a backup from DATE to the database volume
-	docker run --rm -v ${DB_VOLUME}:/data -v $(CURDIR)/backup:/backup ubuntu bash -c "rm -rf /data/* && tar -zxf /backup/${DB_VOLUME}_${DATE}.tgz -C /data --strip 1"
+	$(call ubuntu-fn,bash -c "rm -rf /data/* && tar -zxf /backup/${DB_VOLUME}_${DATE}.tgz -C /data --strip 1")
 
 ## Reusable "functions"
 
 define dc-fn
 	@docker-compose -f docker-compose.yml $(1)
+endef
+
+define ubuntu-fn
+	@docker run --rm -v ${DB_VOLUME}:/data -v $(CURDIR)/backup:/backup ubuntu $(1)
 endef
