@@ -20,7 +20,13 @@ It consists of three containers:
 You should change the name, user and password of the database in the `.env` 
 file at the root of the project and in the `app` folder. 
 
-# TODO
+## Usage
+
+All code for the project is found in the `app` folder. Scripts to interact with the Docker
+containers are in the `bin` folder. the `Makefile` contains convenience scripts for Docker,
+backups, and more.
+
+## TODO
 
 - Remove passwords from checked-in files
-- Use Symfony secret assets for that
+- Use Symfony secrets for that
