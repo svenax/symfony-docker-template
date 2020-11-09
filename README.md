@@ -13,20 +13,13 @@ It consists of three containers:
 ## Installation
 
 1. Clone this repo
-2. Run `make up`
-3. Run `bin/composer install`
-4. Go to <http://localhost> to check it out
-
-You should change the name, user and password of the database in the `.env` 
-file at the root of the project and in the `app` folder. 
+2. Copy `app/.env.local.template` to `app/.env.local` and update it as needed
+3. Run `make up`
+4. Run `bin/composer install`
+5. Go to <http://localhost> to check it out
 
 ## Usage
 
 All code for the project is found in the `app` folder. Scripts to interact with the Docker
-containers are in the `bin` folder. the `Makefile` contains convenience scripts for Docker,
+containers are in the `bin` folder. The `Makefile` contains convenience scripts for Docker,
 backups, and more.
-
-## TODO
-
-- Remove passwords from checked-in files
-- Use Symfony secrets for that
