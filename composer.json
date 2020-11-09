@@ -1,0 +1,14 @@
+{
+    "name": "svenax/symfony-docker-template",
+    "type": "template",
+    "description": "A dockerized template for MySQL + Nginx + Symfony 5.",
+    "keywords": ["template"],
+    "homepage": "https://github.com/svenax/symfony-docker-template",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sven Axelsson",
+            "email": "sven@axelsson.expert"
+        }
+    ]
+}
