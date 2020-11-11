@@ -12,7 +12,7 @@ help: ## Display this help
 -include Makefile.local
 
 ##@ Container
-.PHONY: up down start stop restart rebuild logs
+.PHONY: up down start stop restart rebuild logs status
 
 up: ## Up the docker containers
 	$(call dc-fn,up -d)
@@ -40,6 +40,7 @@ restore-db: ## Restore a backup from DATE to the database volume
 	$(call ubuntu-fn,bash -c "rm -rf /data/* && tar -zxf /backup/${DB_VOLUME}_${DATE}.tgz -C /data --strip 1")
 
 ##@ Helpers
+.PHONY generate-secret
 
 generate-secret: ## Generate a random secret
 	 @LC_ALL=C </dev/urandom tr -dc 'A-Za-z0-9!"#$%&()*+,-./:;<=>?@[\]^_`\{|\}~' | head -c 32 ; echo
