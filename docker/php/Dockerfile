@@ -3,33 +3,18 @@ ARG TIMEZONE
 
 COPY docker/php/php.ini /usr/local/etc/php/conf.d/docker-php-config.ini
 
-RUN apt-get update && apt-get install -y \
-    git \
-    g++ \
-    gnupg \
-    procps \
-    openssl \
-    unzip \
-    zlib1g-dev \
-    libzip-dev \
-    libfreetype6-dev \
-    libpng-dev \
-    libjpeg-dev \
-    libicu-dev  \
-    libonig-dev \
-    libxslt1-dev \
-    acl
+# Install and configure PHP extension
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
+RUN install-php-extensions \
+    exif gd intl opcache pdo_mysql xdebug xsl zip @composer
 
-RUN docker-php-ext-configure gd --with-jpeg --with-freetype 
-
-RUN docker-php-ext-install \
-    pdo pdo_mysql zip xsl gd intl opcache exif mbstring
+# Needed by composer
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git gnupg unzip
 
 # Set timezone
 RUN ln -snf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && echo ${TIMEZONE} > /etc/timezone \
     && printf '[PHP]\ndate.timezone = "%s"\n', ${TIMEZONE} > /usr/local/etc/php/conf.d/tzone.ini \
     && "date"
-
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 WORKDIR /var/www/app
