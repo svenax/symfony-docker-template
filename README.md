@@ -12,7 +12,7 @@ It consists of three containers:
 
 ## Installation
 
-1. Clone this repo
+1. Clone this repo *or* run `composer create-project svenax/symfony-docker-template`
 2. Copy `app/.env.local.template` to `app/.env.local` and update it as needed
 3. Run `make up`
 4. Run `bin/composer install`
