@@ -7,7 +7,7 @@ This is a complete stack for running Symfony 5 in Docker containers using `docke
 It consists of three containers:
 
 - `nginx` - webserver.
-- `php` - PHP-FPM with PHP 7.4.
+- `php` - PHP-FPM with **PHP 7.4**.
 - `db` - MySQL container with a **MySQL 8.0** image.
 
 ## Installation
